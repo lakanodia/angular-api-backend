@@ -26,7 +26,7 @@ export class ProductService {
     return this.http.post<Product>(this.productsUrl, product).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error(error);
-        return throwError(error);
+        return throwError(() => error);
       })
     );
   }
