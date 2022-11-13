@@ -16,13 +16,13 @@ export class ProductService {
       retry(2),
       catchError((error: HttpErrorResponse) => {
         console.error(error);
-        return throwError(error);
+        return throwError(() => error);
       })
     );
   }
 
   createProduct(product: Product): Observable<Product> {
-    product.id= null!;
+    product.id = null!;
     return this.http.post<Product>(this.productsUrl, product).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error(error);
